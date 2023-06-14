@@ -2,9 +2,11 @@ import { createHash } from 'crypto';
 import fs from 'fs';
 
 const calculateHash = async () => {
-    const fileData = fs.readFileSync('src/hash/files/fileToCalculateHashFor.txt');
-    const hashHex = createHash('SHA256').update(fileData).digest('hex');
-    console.log(hashHex)
+    fs.readFile('src/hash/files/fileToCalculateHashFor.txt', 'utf8', (err, data) => {
+        if (err) throw err;
+        const hashHex = createHash('SHA256').update(data).digest('hex');
+        console.log(hashHex)
+    });
 };
 
 await calculateHash();
