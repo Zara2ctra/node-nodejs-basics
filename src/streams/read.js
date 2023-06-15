@@ -1,5 +1,13 @@
+import { createReadStream } from 'node:fs';
+import { stdout } from 'node:process';
+
 const read = async () => {
-    // Write your code here 
+    let readableStream = createReadStream(
+        'src/streams/files/fileToRead.txt',
+        "utf8"
+    );
+
+    readableStream.pipe(stdout);
 };
 
 await read();
